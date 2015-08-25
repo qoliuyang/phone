@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>支付</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+<link rel="stylesheet" href="../css/dialog.css">
+<style>
+    .payBorder input{
+        display: block;
+        width: 100%;
+        border: none;
+        outline: none;
+    }
+    .cover{
+        top:0px;
+        left:0px;
+        display:block;
+        position:fixed;
+        background:rgba(0,0,0,0.4);
+        z-index:10001;
+    }
+</style>
+</head>
+<body class="um-vp ub-ver payBorder" ontouchstart>
+<div class="mt10 ubb ubt c77 ub ub-ac ub-pc bc1 ub-ac">
+    <div class="ub-f1 w0 pt11 pb11 pl30">
+        <div class="fs13 c17">产品期限</div>
+        <div class="fs9 c14 mt5">2个月</div>
+    </div>
+    <div class="ub-img img3"></div>
+    <div class="ub-f1 w0 pt15 pb11 pl25">
+        <div class="fs9 c17">约定年化收益率：</div>
+        <div class="ub mt4">
+            <div class="ub-img img4"></div>
+            <div class="fs11 c78 ml8">10.</div>
+            <div class="fs8 c78 mt4">38</div>
+            <div class="fs6 c78 mt9">%</div>
+        </div>
+    </div>
+</div>
+<div class="mt5 ubb ubt c77 ub ub-ac bc1 ub-ac pl16 h31">
+    <div class="ub-img img11"></div>
+    <div class="c17 fs9 ml6">安全保障</div>
+</div>
+<div class="mt5 ubb ubt c77 ub ub-ac bc1 ub-ac pl16 h31">
+    <div class="c17 fs9 ml20">购买金额</div>
+    <div class="c17 ml20 ub-f1 mr10">
+        <input type="text" placeholder="100元起" class="fs9 mt1" />
+    </div>
+</div>
+<div class="bankcardList mt5 c77 ubt">
+    <div class="ubb ub ub-ac bc1 ub-ac pl16 h31 selectCard">
+        <div class="w12 h12 uc-a uba ub ub-ac ub-pc c79">
+            <div class="w7 h7 uc-a bc72 inIcon"></div>
+        </div>
+        <div class="c17 fs9 ml6">中国银行（尾号0123）</div>
+    </div>
+    <div class="ubb ub ub-ac bc1 ub-ac pl16 h31">
+        <div class="w12 h12 uc-a uba ub ub-ac ub-pc c79">
+            <div class="w7 h7 uc-a bc72 inIcon uhide"></div>
+        </div>
+        <div class="c17 fs9 ml6">工商银行（尾号0123）</div>
+    </div>
+</div>
+<div class="ubb c77 ub ub-ac bc1 ub-ac pl16 h31 useNew">
+    <div class="c79 fs9 ml20 ub-f1">使用新银行卡</div>
+    <div class="ub-img img16 mr10 openFlagIcon"></div>
+</div>
+<div class="newCardArea hide">
+    <div class="ubb c77 ub ub-ac bc1 ub-ac pl16 h31">
+        <div class="c17 fs9 ml20">银行卡号</div>
+        <div class="c17 ml20 ub-f1">
+            <input type="text" placeholder="请输入您的银行卡号" class="fs9 mt1" />
+        </div>
+        <div class="cardIcon mr3 ub-img img24"></div>
+    </div>
+    <div class="ubb c77 ub ub-ac bc1 ub-ac pl16 h31">
+        <div class="c17 fs9 ml20">姓名</div>
+        <div class="c17 ml38 ub-f1 mr10">
+            <input type="text" placeholder="请输入您的姓名" class="fs9 mt1" />
+        </div>
+    </div>
+    <div class="ubb c77 ub ub-ac bc1 ub-ac pl16 h31">
+        <div class="c17 fs9 ml20">身份证号</div>
+        <div class="c17 ml20 ub-f1 mr10">
+            <input type="text" placeholder="请输入您的身份证号" class="fs9 mt1" />
+        </div>
+    </div>
+    <div class="ubb c77 ub ub-ac bc1 ub-ac pl16 h31">
+        <div class="c17 fs9 ml20">手机号码</div>
+        <div class="c17 ml20 ub-f1 mr10">
+            <input type="text" placeholder="请输入银行预留手机号码" class="fs9 mt1" />
+        </div>
+    </div>
+</div>
+<div class="ub mt5 ubt ubb c77">
+    <div class="ub ub-ac bc1 ub-ac pl16 h31 ubr ub-f1">
+        <div class="c17 fs9 ml20">交易密码</div>
+        <div class="c17 ml20 ub-f1 mr10">
+            <input type="text" placeholder="请输入交易密码" class="fs9 mt1" />
+        </div>
+    </div>
+    <div class="ub c79 fs8 ub-ac bc1 pl8 pr8">
+        <div class="modifyDealNum">修改</div>
+        <div class="ml2 mr2">/</div>
+        <div class="forgetDealNum">忘记</div>
+    </div>
+</div>
+<div class="mt5 ubb ubt c77 ub ub-ac bc1 ub-ac pl16 h31">
+    <div class="c17 fs9 ml20">验证码</div>
+    <div class="ub-f1 w0 ml29">
+        <input type="text" placeholder="请输入手机验证码" class="fs9" />
+    </div>
+    <div class="w54 h15 bc73 ub ub-ac ub-pc uc-a2 mr10 timerBlock">
+        <div class="fs6 c1">
+            <span class="timerString">获取</span>
+            <span class="timerNumber hide">60s</span>
+        </div>
+    </div>
+</div>
+<div class="ub-img img17 ml18 mr18 c1 tx-c pt10">
+    <div class="fs6">已向您选中银行卡绑定的手机186****1234发送了验证码，注意查收！</div>
+</div>
+<div class="mt5 ml18 mr18 bc68 c1 ub ub-ac ub-pc h25 mb10 fs10 uc-a3 payButton">
+    <div>支付</div>
+</div>
+<div class="c79 ub ub-ac ub-pc mt10 mb10">
+    <div class="ub-img img5"></div>
+    <div class="fs8 ml2">[由金融机构或担保公司提供本息保障]</div>
+</div>
+<div class="cover ub ub-ac ub-pc uhide w_100 h_100">
+    <div class="w220 bc77 setDealPassnumberArea uc-a6">
+        <div class="uc-t pt10 pb10 tx-c c17 fs11">设置交易密码</div>
+        <div class="ubb ubt c77 ub ub-ac bc1 ub-ac pl8 h31">
+            <div class="c17 fs9">交易密码</div>
+            <div class="c17 ml30 ub-f1 mr10">
+                <input type="text" placeholder="请输入交易密码" class="fs9 mt1" />
+            </div>
+        </div>
+        <div class="ubb c77 ub ub-ac bc1 ub-ac pl8 h31">
+            <div class="c17 fs9">重复交易密码</div>
+            <div class="c17 ml12 ub-f1 mr10">
+                <input type="text" placeholder="请再次输入交易密码" class="fs9 mt1" />
+            </div>
+        </div>
+<!--
+        <div class="dialogPrompt ub ub-ac ub-pc pt5 pb5 c88">
+            <div class="node bc73 w4 h4 uc-a"></div>
+            <div class="promptString fs6 ml2">为了您今后的资金交易安全，请设置交易密码！</div>
+        </div>
+-->
+        <div class="dialogPrompt ub ub-ac ub-pc pt5 pb5 c78 wrong">
+            <div class="node bc69 w4 h4 uc-a"></div>
+            <div class="promptString fs6 ml2">您两次输入的密码不一致，请重新输入！</div>
+        </div>
+        <div class="okButton c79 fs11 pt4 pb10 tx-c">确定</div>
+    </div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/dialog.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    $(".useNew").on("click",function(){
+        $(".bankcardList").children().removeClass("selectCard").find(".inIcon").addClass("uhide");
+        var openFlagIcon = $(this).find(".openFlagIcon");
+        var newCardArea = $(".newCardArea");
+        if(openFlagIcon.hasClass("img15"))
+            iP.closeNewcardArea();
+        else if(openFlagIcon.hasClass("img16"))
+            iP.openNewcardArea();
+    });
+    $(".timerBlock").on("click",function(){
+        if($(this).hasClass("run"))
+            return;
+        iP.setTimer();
+    });
+    $(".bankcardList").children().on("click",function(){
+        if(iP.deleteCardFlag)
+            return;
+        var self = $(this);
+        self.addClass("selectCard").find(".inIcon").removeClass("uhide");
+        self.siblings().removeClass("selectCard").find(".inIcon").addClass("uhide");
+        iP.closeNewcardArea();
+    });
+    iP.deleteCardTimer = undefined;
+    iP.bindDeleteCard();
+    $(".payButton").on("click",function(){
+        iG.openWin("payResult_win");
+    });
+    $(".modifyDealNum").on("click",function(){
+        iG.openWin("optDealNum_win",{type:"modify"});
+    });
+    $(".forgetDealNum").on("click",function(){
+        iG.openWin("optDealNum_win",{type:"forget"});
+    });
+    //iP.showPasswordArea();//显示设置交易密码的dialog
+};
+iP.bindDeleteCard = function(){
+    var cards = $(".bankcardList").children();
+    cards.on("mousedown", iP.openDeleteCardDialog);
+    cards.on("touchstart", iP.openDeleteCardDialog);
+    cards.on("mouseup", function() {
+        clearTimeout(iP.deleteCardTimer);
+    });
+    cards.on("touchend", function() {
+        clearTimeout(iP.deleteCardTimer);
+    });
+};
+iP.openDeleteCardDialog = function(){
+    iP.selectCard = $(this);
+    iP.deleteCardTimer = setTimeout(function() {
+        iP.deleteCardFlag = true;
+        var setting = {
+            title:"删除银行卡",
+            content:"是否继续执行此操作？",
+            buttons:{
+                "ok":"确定",
+                "cancel":"取消"
+            },
+            yes:function(selectCard){
+                iP.selectCard.fadeOut(200,function(){
+                    iP.selectCard.remove();
+                });
+                iP.deleteCardFlag = false;
+            },
+            no:function(){
+                iP.deleteCardFlag = false;
+            }
+        };
+        initDialog(setting);
+    }, 2000);
+};
+iP.openNewcardArea = function(){
+    var openFlagIcon = $(".openFlagIcon");
+    var newCardArea = $(".newCardArea");
+    openFlagIcon.removeClass("img16").addClass("img15");
+    newCardArea.show(120);
+};
+iP.closeNewcardArea = function(){
+    var openFlagIcon = $(".openFlagIcon");
+    var newCardArea = $(".newCardArea");
+    openFlagIcon.removeClass("img15").addClass("img16");
+    newCardArea.hide(120);
+};
+iP.setTimer = function(){
+    var timerBlock = $(".timerBlock");
+    var timerString = timerBlock.find(".timerString");
+    var timerNumber = timerBlock.find(".timerNumber");
+    timerBlock.removeClass("bc73").addClass("bc75 run");
+    timerString.text("重新获取");
+    timerNumber.removeClass("hide");
+    var time = 60;
+    var regetTime = setInterval(function(){
+        if(time<=0){
+            clearInterval(regetTime);
+            timerNumber.addClass("hide");
+            timerBlock.removeClass("bc75 run").addClass("bc73");
+            timerString.text("获取");
+        }else{
+            time --;
+            var string = time+'s';
+            timerNumber.text(string);
+        }
+    },1000);
+};
+iP.showPasswordArea = function(){
+    $(".cover").removeClass("uhide");
+};
+iP.init();
+</script>
+</body>
+</html>

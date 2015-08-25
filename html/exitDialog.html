@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>安全退出</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+<link rel="stylesheet" href="../css/dialog.css">
+    <style>
+        html{
+            background:none;
+        }
+        body{
+            height:100%;
+            background:none;
+        }
+    </style>
+</head>
+<body class="um-vp">
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/dialog.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    var setting = {
+        title:"安全退出",
+        content:"确定要退出当前登录账户吗？",
+        buttons:{
+            "ok":"确定",
+            "cancel":"取消"
+        },
+        yes:function(){
+            iP.logout();
+        },
+        no:function(){
+            uexWindow.close(-1); 
+        }
+    };
+    initDialog(setting);
+};
+iP.logout = function(){
+    var customer_no = localStorage.getItem("customer_no");
+    $.iBoxWait();
+    iG.ajax({
+        data:{
+            api_name : "daqian.tiger.app.logout",
+            customer_no : customer_no
+        },
+        success:function(data){
+            iG.ajaxCallback();
+            if(iG.isGood(data,true)){
+                localStorage.setItem("alreadyLogin","false");//重置已登录标志
+                localStorage.removeItem("customer_no");
+                uexWindow.evaluateScript("myIncom_win",0,"iP.backToIndex()");
+            }
+        }
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

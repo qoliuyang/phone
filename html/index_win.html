@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+<title>大钱财富</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/win.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/iBox.css">
+</head>
+<body class="um-vp c-wh" ontouchstart>
+<div id="page_0" class="up ub ub-ver" tabindex="0">
+    <!-- 页头 -->
+    <header id="header" class="header">
+        <div class="title">
+            <div class="title-left uhide" goback></div>
+            <div class="title-mid fs12" id="title">大钱财富</div>
+<!--            <div class="title-right" openmore></div>-->
+<!--            <div class="title-right"></div>-->
+            <div class="fs8 c1 mt4 myIncome">我的收益</div>
+        </div>  
+    </header>
+    <!-- 内容 -->
+    <div id="content" class="content"></div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/Base64.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/win.js"></script>
+<script>
+zy_init();
+window.uexOnload = function(type){
+    window.onorientationchange = window.onresize = function(){
+        zy_resize("content",0,$$("header").offsetHeight);
+    }; 
+    uexDevice.getInfo('11');//获取deviceToken号
+    uexDevice.getInfo('1');//获取系统版本
+    uexDevice.getInfo('2');//获取厂商信息
+    uexDevice.getInfo('17');//获取硬件型号
+    uexDevice.getInfo('0');//获取CPU信息
+    uexDevice.getInfo('10');//获取IMEI信息
+    uexDevice.getInfo('15');//获取电信运营商名称
+    uexDevice.getInfo('16');//获取mac地址
+    uexDevice.getInfo('20');//获取softToken
+    uexDevice.getInfo('18');//获取手机分辨率
+    uexDevice.cbGetInfo=function (opCode,dataType,data){
+        var device = eval('('+data+')');
+        var deviceToken=device.deviceToken;
+		if(deviceToken!=null&&deviceToken.length>0){
+			localStorage.setItem("device_token",deviceToken);
+		}
+        var osVersion=device.os;
+		if(osVersion!=null&&osVersion.length>0){
+			iP.deviceInfo["system_version"] = osVersion;
+		}
+        var manufacturer=device.manufacturer;
+		if(manufacturer!=null&&manufacturer.length>0){
+			iP.deviceInfo["manufacturer"] = manufacturer;
+		}
+        var model=device.model;
+		if(model!=null&&model.length>0){
+			iP.deviceInfo["hardware_version"] = model;
+		}
+        var cpuFrequency=device.cpu;
+		if(cpuFrequency!=null&&cpuFrequency.length>0){
+			iP.deviceInfo["cpu"] = cpuFrequency;
+		}
+        var imei=device.imei;
+		if(imei!=null&&imei.length>0){
+			iP.deviceInfo["imei"] = imei;
+		}
+        var operatorName=device.mobileOperatorName;
+		if(operatorName!=null&&operatorName.length>0){
+			iP.deviceInfo["operator"] = operatorName;
+		}
+        var macAddress=device.macAddress;
+		if(macAddress!=null&&macAddress.length>0){
+			iP.deviceInfo["mac_address"] = macAddress;	
+		}
+        var softToken = device.softToken;
+		if(softToken!=null&&softToken.length>0){
+			iP.deviceInfo["soft_token"] = softToken;	
+		}
+        var resolutionRatio=device.resolutionRatio;
+		if(resolutionRatio!=null&&resolutionRatio.length>0){
+			iP.deviceInfo["resolution"] = resolutionRatio;	
+		}
+    };
+    if (!type) {
+        win.init();
+        //iP.getKeys();
+    }
+    var plat = uexWidgetOne.getPlatform();
+    if(plat){//控制android手机的返回键，当在主页点返回时，显示退出dialog
+        uexWindow.onKeyPressed = function(keyCode){
+            if(keyCode == 0)
+                uexWidgetOne.exit();
+        }
+        uexWindow.setReportKey(0,1);
+    }
+}; 
+var iP = {};
+iP.deviceInfo = {};
+//测试数据
+localStorage.setItem("device_token","dt123");
+if(!iP.deviceInfo.system_version){
+    iP.deviceInfo ={
+        system_version : "1.0",
+        manufacturer : "xiaomi",
+        hardware_version : "1.2",
+        cpu : "arm7",
+        imei : "12313212311",
+        operator : "China UC",
+        mac_address : "12312312",
+        soft_token : "d_t 123",
+        resolution : "1080p"
+    };
+}
+//iP.getKeys = function(){//申请密钥
+//    //$.iBoxWait();//显示加载图标
+//    iG.ajax({
+//        data:{
+//            api_name : "daqian.tiger.app.request_security_key"
+//        },
+//        success:function(data){
+//            iG.ajaxCallback();
+//            if(iG.isGood(data,true)){
+//                localStorage.setItem("encodeKey",data.encrypt_key);
+//                localStorage.setItem("decodeKey",data.decrypt_key);
+//                iP.registDeviceInfo();
+//                iP.judgeLogin();
+//            }
+//        }
+//    });
+//};
+//注册设备信息
+iP.registDeviceInfo = function(){
+    iG.ajax({
+        data:{
+            api_name : "daqian.tiger.app.register_device",
+            system_version : iP.deviceInfo["system_version"],
+            manufacturer : iP.deviceInfo["manufacturer"],
+            hardware_version : iP.deviceInfo["hardware_version"],
+            cpu : iP.deviceInfo["cpu"],
+            imei : iP.deviceInfo["imei"],
+            operator : iP.deviceInfo["operator"],
+            mac_address : iP.deviceInfo["mac_address"],
+            soft_token : iP.deviceInfo["soft_token"],
+            resolution : iP.deviceInfo["resolution"]
+        },
+        success:function(data){
+            if(data.dq_code == "96800" || data.dq_code == "10000"){//重复注册或者注册成功
+                localStorage.setItem("registResult","true");
+                iP.judgeLogin();//判断是否可以自动登录
+            }
+            //如果注册失败，就不允许其做任何页面操作
+        }
+    });
+};
+//判断自动登录
+iP.judgeLogin = function(){
+    iG.ajax({
+        data:{
+            api_name : "daqian.tiger.app.login"
+        },
+        success:function(data){
+            if(data.is_success){//返回成功，表示当前设备已经关联到用户，已经自动登录了
+                localStorage.setItem("alreadyLogin","true");
+                localStorage.setItem("customer_no",data.customer_no);
+            }
+            else
+                localStorage.setItem("alreadyLogin","false");
+            iP.bindMyIncome();
+        }
+    });
+};
+//绑定我的收益按钮
+iP.bindMyIncome = function(){
+    $(".myIncome").on("click",function(){//根据登录状态看进入收益页还是登陆页
+        var alreadyLogin = localStorage.getItem("alreadyLogin");
+        if(alreadyLogin == "true")
+            iG.openWin("myIncom_win");
+        else if(alreadyLogin == "false")
+            iG.openWin("login_win",{fromPage:"root"});
+    });
+};
+win.openPopover("index");
+iP.registDeviceInfo();
+</script>
+</body>
+</html>

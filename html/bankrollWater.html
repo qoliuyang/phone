@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>资金流水</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+</head>
+<body class="um-vp ub-ver" ontouchstart>
+<div class="bc1 p10 menu">
+    <div class="typeTab ub uc-a3 uba c83 tx-c fs9">
+        <div class="c83 ubr w0 ub-f1 selectType" type="payout">
+            <div class="bc70 c1 pt7 pb7 uc-tl1 uc-bl1">支出</div>
+        </div>
+        <div class="c83 ubr w0 ub-f1" type="income">
+            <div class="c80 pt7 pb7">收入</div>
+        </div>
+        <div class="w0 ub-f1" type="withdrawCash">
+            <div class="c80 pt7 pb7 uc-tr1 uc-br1">提现</div>
+        </div>
+    </div>
+</div>
+<div class="mt7 mr7 ml7 bc1 payoutPage">
+    <div class="item">
+        <div class="ub ub-ac pt10 pb10 pl8 c77 ubb">
+            <div class="ub-f3 fs8 c4">
+                <span>订单号：</span>
+                <span>0000120150630</span>
+            </div>
+            <div class="ub-f2 fs8 c4 tx-c">2015-07-10  15:23</div>
+        </div>
+        <div class="ub ub-ac pt10 pb10 pl8">
+            <div class="ub-f3 fs8 c4">中国银行（尾号5632）</div>
+            <div class="ub-f2 fs8 c4 ub ub-ac ub-pc">
+                <div>金额：</div>
+                <div class="">100.00元</div>
+            </div>
+            <div class="ub-img img21 pa b0 r0"></div>
+        </div>
+    </div>
+</div>
+<div class="mt7 mr7 ml7 bc1 incomePage uhide">
+    <div class="item">
+        <div class="ub ub-ac pt10 pb10 pl8 c77 ubb">
+            <div class="ub-f3 fs8 c4">
+                <span>订单号：</span>
+                <span>0000120150630</span>
+            </div>
+            <div class="ub-f2 fs8 c4 tx-c">2015-07-10  15:23</div>
+        </div>
+        <div class="ub ub-ac pt9 pb9 pl8">
+            <div class="ub-f3 fs8 c4 ub ub-ac">
+                <div>金额：</div>
+                <div>100.00元</div>
+            </div>
+            <div class="ub-f2 ub ub-ac ub-pc">
+                <div class="ub-img img22"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt7 mr7 ml7 bc1 withdrawCashPage uhide">
+    <div class="item">
+        <div class="ub ub-ac pt10 pb10 pl8 c77 ubb">
+            <div class="ub-f3 fs8 c4">
+                <span>流水号：</span>
+                <span>0000120150630</span>
+            </div>
+            <div class="ub-f2 fs8 c4 tx-c">2015-07-10  15:23</div>
+        </div>
+        <div class="ub ub-ac pt10 pb10 pl8">
+            <div class="ub-f3 fs8 c4">中国银行（尾号5632）</div>
+            <div class="ub-f2 fs8 c4 ub ub-ac ub-pc">
+                <div>金额：</div>
+                <div class="">100.00元</div>
+            </div>
+            <div class="ub-img img23 pa t0 r0"></div>
+        </div>
+    </div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script>
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    $(".typeTab").children().on("click",function(){
+        var self = $(this);
+        self.addClass("selectType");
+        self.children().addClass("bc70 c1").removeClass("c80");
+        self.siblings().removeClass("selectType").children().removeClass("bc70 c1").addClass("c80");
+        var type = $(this).attr("type");
+        var selectPage = $("."+type+"Page");
+        selectPage.removeClass("uhide").siblings().not(".menu").addClass("uhide");
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

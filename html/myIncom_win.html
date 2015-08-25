@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+<title>我的收益</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/win.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<style>
+    .splitLine{
+        background-image: url("../images/img9.png");
+        width: 1.56em;
+        height: 3.15em;
+        -webkit-background-size:contain;
+        background-size:contain;
+        background-repeat:no-repeat;
+        background-position:center;
+    }
+</style>
+</head>
+<body class="um-vp c-wh" ontouchstart>
+<div id="page_0" class="up ub ub-ver" tabindex="0">
+    <!-- 页头 -->
+    <header id="header" class="header">
+        <div class="title">
+            <div class="f8 c1 bankrollWater">资金流水</div>
+            <div class="title-mid fs12" id="title">我的收益</div>
+            <div class="exit fs8 c1">安全退出</div>
+<!--            <div class="title-right" openmore></div>-->
+<!--            <div class="title-right"></div>-->
+        </div>  
+    </header>
+    <!-- 内容 -->
+    <div id="content" class="content"></div>
+    <div id="footer" class="footer">
+        <div class="ub bc68 ubt c14 ub-ac">
+            <div class="ub-f1 tx-c w0 c1 fs12 buyAgain pt8 pb8">再次购买</div>
+        </div>
+    </div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/win.js"></script>
+<script src="../js/dialog.js"></script>
+<script>
+zy_init();
+window.uexOnload = function(type){
+    window.onorientationchange = window.onresize = function(){
+        zy_resize("content",0,$$("header").offsetHeight);
+    }; 
+    if (!type) {
+        $(".exit").on("click",function(){
+            win.openExitDialog();
+        });
+        win.init();
+        win.openPopover("myIncom");
+        $(".buyAgain").on("click",function(){
+            iG.openWin("productDetail_win");
+        });
+        $(".bankrollWater").on("click",function(){
+            iG.openWin("bankrollWater_win");
+        });
+    }
+}; 
+var iP = {};
+iP.backToIndex = function(){
+    var array = iG.getObjItem("openWin","array");
+    for(var i in array){
+        if(array[i]!="myIncom_win")//把其他先关掉
+            uexWindow.evaluateScript(array[i],0,"uexWindow.close(-1)");
+    }
+    iG.setObjItem("openWin","array",[]);
+    uexWindow.close(-1);
+};
+iP.unLoad = function(){
+    uexWindow.close();
+};
+</script>
+</body>
+</html>

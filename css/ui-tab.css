@@ -1,0 +1,7 @@
+input[type="radio"]:checked + div>div{
+    color:#fff;
+    background-color:#24a0d4;
+}
+.tab.act>div{
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.2) inset;
+}

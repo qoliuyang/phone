@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>大钱信息</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+    <style>
+        .notice{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="um-vp ub-ver" ontouchstart>
+<div class="ub ub-ac pt7 pb7 pl11 bc68 c1 noticeBar">
+    <div class="bc69 w2 h9"></div>
+    <div class="fs9 ml3">公告：</div>
+    <div class="fs7 notice mt1 ub-f1">大钱理财代金券攻略  怎么才能得到代金券？</div>
+    <div class="detail uc-a2 pt2 pb2 pl8 pr8 bc69 fs7">详情</div>
+    <div class="uc-a uba c76 w9 h9 tx-c ub ub-ac ub-pc ml8 mr4 closeNotice">
+        <div class="fs6">X</div>
+    </div>
+</div>
+<div class="pptArea w_100">
+    <img class="w_100 banner1" src="../images/img2.png"/>
+    <img class="w_100 hide banner2" src="../images/img6.png"/>
+    <div class="leadBar ub ub-pc w_100 pa" style="bottom:0.5em;">
+        <div class="uc-a w5 h5 bc69" index=1></div>
+        <div class="uc-a w5 h5 bc1 ml8" index=2></div>
+    </div>
+</div>
+<div class="mt10 ubb ubt c77 ub ub-ac ub-pc bc1 ub-ac short">
+    <div class="ub-f1 w0 pt11 pb11 pl30">
+        <div class="fs13 c17">短期理财</div>
+        <div class="fs10 c4">1-3个月</div>
+    </div>
+    <div class="ub-img img3"></div>
+    <div class="ub-f1 w0 pt15 pb11 pl25">
+        <div class="fs9 c17 ml23">年化收益率：</div>
+        <div class="ub mt2">
+            <div class="ub-img img4"></div>
+            <div class="fs11 c78 ml8">10.</div>
+            <div class="fs8 c78 mt4">38</div>
+            <div class="fs6 c78 mt9">%</div>
+        </div>
+    </div>
+</div>
+<div class="mt5 ubb ubt c77 ub ub-ac ub-pc bc1 ub-ac middle">
+    <div class="ub-f1 w0 pt11 pb11 pl30">
+        <div class="fs13 c17">中期理财</div>
+        <div class="fs10 c4">3-6个月</div>
+    </div>
+    <div class="ub-img img3"></div>
+    <div class="ub-f1 w0 pt15 pb11 pl25">
+        <div class="fs9 c17 ml23">年化收益率：</div>
+        <div class="ub mt2">
+            <div class="ub-img img4"></div>
+            <div class="fs11 c78 ml8">12.</div>
+            <div class="fs8 c78 mt4">52</div>
+            <div class="fs6 c78 mt9">%</div>
+        </div>
+    </div>
+</div>
+<div class="mt5 ubb ubt c77 ub ub-ac ub-pc bc1 ub-ac long">
+    <div class="ub-f1 w0 pt11 pb11 pl30">
+        <div class="fs13 c17">中长期理财</div>
+        <div class="fs10 c4">7-12个月</div>
+    </div>
+    <div class="ub-img img3"></div>
+    <div class="ub-f1 w0 pt15 pb11 pl25">
+        <div class="fs9 c17 ml23">年化收益率：</div>
+        <div class="ub mt2">
+            <div class="ub-img img4"></div>
+            <div class="fs11 c78 ml8">13.</div>
+            <div class="fs8 c78 mt4">67</div>
+            <div class="fs6 c78 mt9">%</div>
+        </div>
+    </div>
+</div>
+<div class="w_100 tx-c mt16 c79 fs8">[由金融机构或担保公司提供本息保障]</div>
+<div class="ub ub-pc mt8">
+    <div class="ub-img img5"></div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(){
+    iP.bindChangeBanner();
+    $(".closeNotice").on("click",function(){
+        $(".noticeBar").fadeOut(200,function(){
+            $(this).addClass("uhide");
+        });
+    });
+    $(".leadBar").children().on("click",function(){
+        clearInterval(iP.timmer);
+        var index = $(this).attr("index");
+        iP.changeBanner(index);
+        iP.bindChangeBanner();
+    });
+    $(".middle").on("click",function(){
+        iG.openWin("productDetail_win");
+    });
+    $(".short").on("click",function(){
+        iG.openWin("deviceInfo");
+    });
+};
+iP.changeBanner = function(index){
+    var selectedIcon = $(".leadBar").find("[index="+index+"]");
+    var anotherIcon = selectedIcon.siblings();
+    selectedIcon.removeClass("bc1").addClass("bc69");
+    anotherIcon.removeClass("bc69").addClass("bc1");   
+    var showImg,hideImg;
+    if(index == 1)
+        showImg = $(".banner1");
+    else if(index == 2)
+        showImg = $(".banner2");
+    hideImg = showImg.siblings().not(".leadBar");
+    hideImg.fadeOut(200,function(){
+        showImg.fadeIn(200);
+    });
+};
+iP.bindChangeBanner = function(){
+    iP.timmer = setInterval(function(){
+        var index = $(".leadBar").find(".bc69").attr("index");
+        if(index == 1)
+            index = 2;
+        else if(index == 2)
+            index = 1;
+        iP.changeBanner(index);
+    },3000);
+};
+iP.load = function(isRefresh){
+    isRefresh || $.iBoxWait();
+    iG.ajax({
+        data : {
+            "type":"WEATHER",
+            "condition":{ "iataCode": airportCode}
+        },
+        success : function(data){     
+            iG.ajaxCallback(isRefresh);
+            if(iG.isGood(data,true)){
+                
+            }else{
+                
+            }
+        }
+    })
+};
+iP.init();
+</script>
+</body>
+</html>

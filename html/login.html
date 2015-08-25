@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>登录账户</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+<link rel="stylesheet" href="../css/dialog.css">
+<style>
+    .loginBorder input{
+        display: block;
+        width: 100%;
+        border: none;
+        outline: none;
+    }
+</style>
+</head>
+<body class="um-vp ub-ver loginBorder" ontouchstart>
+<div class="ub mt10 ubt ubb c77 bc1 ub-ac h32 pl17 pr8">
+    <div class="c17 fs9">手机号码</div>
+    <div class="ub-f1 w0 ml20">
+        <input type="text" placeholder="请输入银行预留手机号" class="fs9" id="mobile" />
+    </div>
+</div>
+<div class="ub ubb c77 bc1 ub-ac h32 pl17 pr8">
+    <div class="c17 fs9">验证码</div>
+    <div class="ub-f1 w0 ml29">
+        <input type="text" placeholder="请输入验证码" class="fs9" id="smsCode" />
+    </div>
+    <div class="w54 h15 bc73 ub ub-ac ub-pc uc-a2 mr10 timerBlock">
+        <div class="fs6 c1">
+            <span class="timerString">获取</span>
+            <span class="timerNumber hide">60s</span>
+        </div>
+    </div>
+</div>
+<div class="mt26 ml18 mr18 bc74 c1 ub ub-ac ub-pc h25 mb10 fs10 uc-a3 loginButton"><div>登录</div></div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/dialog.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    localStorage.setItem("alreadyLogin","false");//重置已登录标志
+    iP.bindGetSmsCode();
+    iP.bindLogin();
+};
+//设置点击获取验证码
+iP.bindGetSmsCode = function(){
+    $(".timerBlock").on("click",function(){
+        if($(this).hasClass("run"))
+            return;
+        var mobile = $("#mobile").val();
+        var mobileRegx=/^(?:13\d|15\d|18[123456789])-?\d{5}(\d{3}|\*{3})$/;
+        if(!mobileRegx.test(mobile)){
+            iG.alert("您输入的手机号码格式不正确，请重新输入",function(){
+                $("#mobile").focus();
+            });
+            return;
+        }
+        iG.ajax({
+            data:{
+                api_name : "daqian.tiger.app.send_sms",
+                mobile : mobile,
+                biz_scenario : "LOGIN"
+            },
+            success:function(data){
+                return true;
+            }
+        });
+        iP.setTimer();
+    });
+};
+//获取验证码倒计时（1分钟可再次获取）
+iP.setTimer = function(){
+    var timerBlock = $(".timerBlock");
+    var timerString = timerBlock.find(".timerString");
+    var timerNumber = timerBlock.find(".timerNumber");
+    timerBlock.removeClass("bc73").addClass("bc75 run");
+    timerString.text("重新获取");
+    timerNumber.removeClass("hide");
+    var time = 60;
+    var regetTime = setInterval(function(){
+        if(time<=0){
+            clearInterval(regetTime);
+            timerNumber.addClass("hide");
+            timerBlock.removeClass("bc75 run").addClass("bc73");
+            timerNumber.text("60");
+        }else{
+            time --;
+            var string = time+'s';
+            timerNumber.text(string);
+        }
+    },1000);
+};
+iP.bindLogin = function(){
+    $(".loginButton").on("click",function(){
+        var mobile = $("#mobile").val();
+        var mobileRegx=/^(?:13\d|15\d|18[123456789])-?\d{5}(\d{3}|\*{3})$/;
+        if(!mobileRegx.test(mobile)){
+            iG.alert("您输入的手机号码格式不正确，请重新输入",function(){
+                $("#mobile").focus();
+            });
+            return;
+        }
+        var smsCode = $("#smsCode").val();
+        var smsCodeRegx = /^\d{6}$/;
+        if(!smsCodeRegx.test(smsCode)){
+            iG.alert("您输入的验证码有误，验证码格式应该为6位数字",function(){
+                $("#smsCode").focus();
+            });
+            return;
+        }
+        $.iBoxWait();
+        iG.ajax({
+            data:{
+                api_name : "daqian.tiger.app.login",
+                mobile : mobile,
+                sms_validation_code : smsCode
+            },
+            success:function(data){
+                iG.ajaxCallback();
+                if(iG.isGood(data,true)){
+                    localStorage.setItem("customer_no",data.customer_no);
+                    localStorage.setItem("alreadyLogin","true");
+                    var fromPage = iG.getObjItem("login_win","fromPage");
+                    if(fromPage == "root"){//从主页进入，登录成功要跳转到我的收益页
+                        iG.openWin("myIncom_win");
+                    }//15900837991
+                    uexWindow.close(-1);
+                }
+            }
+        });
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

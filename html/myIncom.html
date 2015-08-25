@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的收益</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+</head>
+<body class="um-vp ub-ver" ontouchstart>
+<div class="ub ubt ubb c1 pt8 bc70 pl15 pr15">
+    <div class="w0 ub-f1 c1">
+        <div class="fs9 mt16">累积收益</div>
+        <div class="mt5">
+            <span class="fs15">1000.</span>
+            <span class="fs9">38元</span>
+        </div>
+    </div>
+    <div class="ub-img img8"></div>
+    <div class="w0 ub-f1">
+        <div class="fs9 mt16 ml29">昨日收益</div>
+        <div class="mt5 ml29">
+            <span class="fs15">139.</span>
+            <span class="fs9">57元</span>
+        </div>
+    </div>
+</div>
+<div class="pl15 bc70 c1 ub ub-ac h28">
+    <div class="fs9">可提现总金额：</div>
+    <div class="ubb pl2 pr2">
+        <span class="fs15">5000.</span>
+        <span class="fs9">00元</span>
+    </div>
+    <div class="ub-f1"></div>
+    <div class="c87 fs9 mr24 withdrawCash">提现</div>
+</div>
+<div class="list">
+    <div class="mt7 c77 ubb ubt bc1">
+        <div class="pt8 pb8 pl15 pr17 ub ub-ac ubb">
+            <div class="c17">产品类型:</div>
+            <div class="ml2 c17">短期理财/2个月</div>
+            <div class="ub-f1"></div>
+            <div class="c17">2015-07-03 14:07</div>
+            <div class="c80 ml10">计息中</div>
+        </div>
+        <div class="ub ubb c77">
+            <div class="ub-f1 w0 pt11 pb11 pl23 ubr">
+                <div class="fs8 c17">投资本金</div>
+                <div class="fs10 c80">
+                    <span class="fs11">2000.</span>
+                    <span class="fs8">00元</span>
+                </div>
+            </div>
+            <div class="ub-f1 w0 pt11 pb11 pl23">
+                <div class="fs8 c17 ml23">约定年收益率：</div>
+                <div class="ub mt2 c80">
+                    <div class="ub-img img4"></div>
+                    <div class="fs10 ml8 mt1">10.</div>
+                    <div class="fs8 mt3">38</div>
+                    <div class="fs6 mt8">%</div>
+                </div>
+            </div>
+        </div>
+        <div class="ub c77">
+            <div class="ub-f1 w0 pt11 pb11 pl23 ubr">
+                <div class="fs8 c17">昨日收益</div>
+                <div class="fs10 c80">
+                    <span class="fs11">85.</span>
+                    <span class="fs8">57元</span>
+                </div>
+            </div>
+            <div class="ub-f1 w0 pt11 pb11 pl23">
+                <div class="fs8 c17 ml11">累积收益</div>
+                <div class="fs10 c80 ml9">
+                    <span class="fs11">500.</span>
+                    <span class="fs8">00元</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="c82 lh38 tx-c fs7">已显示全部信息</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    iG.pullDown(function(){
+        iP.init(true);
+    });
+}
+iP = {};
+iP.init = function(refresh){
+    $("withdrawCash").on("click",function(){
+        iG.openWin("withdrawCash_win");
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>母版</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="../css/ui-base.css?v=202020">
+<link rel="stylesheet" href="../css/ui-box.css?v=202020">
+<link rel="stylesheet" href="../css/ui-position.css?v=202020">
+<link rel="stylesheet" href="../css/ui-img.css?v=202020">
+<link rel="stylesheet" href="../css/ui-color.css?v=202020">
+<link rel="stylesheet" href="../css/ui-input.css?v=202020">
+<link rel="stylesheet" href="../css/iBox.css?v=202020">
+<style>
+    html,body{
+        -webkit-user-select: none;
+    }
+</style>
+</head>
+<body>
+<div style="background:white;height:380px;position:absolute;top:80px;width:100%;overflow-y:hidden;" id="canvasBorder">
+    <canvas class="pa" id="canvas" style="bottom:0px;"></canvas>
+    <div class="pa flagDiv uhide" style="width:20px;bottom:0px;background:none;">
+        <div class="shuxian pa c7" style="left:10px;width:0px;border-left:1px solid;bottom:0px;"></div>
+        <div class="percentCircle pa uc-a c6 uhide" style="left:3px;width:10px;height:10px;bottom:-7px;border:2px solid;background:white;"></div>
+        <div class="number pa c7 uhide" style="font-size:26px;"></div>
+        <div class="date pa c11 w_100" style="font-size:19.24px;text-align:center;"></div>
+    </div>
+</div>
+<script src="../js/zy_control.js?v=202020"></script>
+<script src="../js/zy_click.js?v=202020"></script>
+<script src="../js/jquery.js?v=202020"></script>
+<script src="../js/iBox.js?v=202020"></script>
+<script src="../js/Base64.js?v=202020"></script>
+<script src="../js/common.js?v=202020"></script>
+<script>
+function draw(canvasId,array){
+    var canvas = $$(canvasId);
+    var ctx = canvas.getContext("2d");
+    var width = $("body").width();
+    var height = $("#" + canvasId).parent().height()-80;
+    var offsetX = 20;//离最左有多少px
+    var perWidth = (width-offsetX*2)/(6-1);//平均每份占宽
+    var perHeight = height/100;
+    canvas.width = perWidth*(array.length-1)+2*offsetX;
+    canvas.height = height;
+    ctx.beginPath();
+    ctx.moveTo(offsetX,height);//起点
+    for(var i = 0; i < array.length-1; i++){
+        var y1 = array[i],y2 = array[i+1];
+        var dheight = (y2-y1)*perHeight;
+        ctx.lineTo(offsetX+perWidth*i,(100-y1)*perHeight);//移到第一个坐标点
+        var x = offsetX+perWidth*i;
+        for(x;x<offsetX+perWidth*(i+1)+1;x++){//画半周期cos线
+            if(i%2==0)//每当画下个周期时，cos函数经过PI这么长会反相
+                flag =1;
+            else if(i%2==1)
+                flag =-1;
+            ctx.lineTo(x,flag*dheight/2*Math.cos((x-offsetX)*Math.PI/perWidth)+(100-(y1+y2)/2)*perHeight);
+        }
+        appendDiv(i,offsetX/2+perWidth*i);//加数据显示DIV
+    }
+    ctx.lineTo(offsetX+(array.length-1)*perWidth,height);
+    ctx.lineTo(100,height);
+    ctx.closePath();
+    ctx.fillStyle = "#9aafda";
+    ctx.fill();
+    appendDiv(array.length-1,offsetX/2+perWidth*(array.length-1));//加数据显示DIV
+};
+function appendDiv(i,left){//i标志第几个,left为离最左宽度
+    var elem, clone = $("#canvasBorder>div:first");
+    elem = clone.clone().removeClass("uhide");
+    elem.css("left",left+'px');
+    elem.attr("data",dataArray[i]);//保留数据
+    var canvasHeight = $("#canvas").height();
+    elem.css("height",canvasHeight+20+'px');
+    elem.find(".shuxian").css("height",canvasHeight+'px');
+    var circleDiv = elem.find(".percentCircle");
+    circleDiv.css("bottom",percentArray[i]/100*canvasHeight-7+'px');
+    var numberDiv = elem.find(".number");//定位显示的数字
+    numberDiv.text(dataArray[i]);
+    numberDiv.css('bottom',parseFloat(circleDiv.css('bottom'))+'px');
+    var dateDiv = elem.find(".date");
+    dateDiv.css("top",-30+'px');
+    dateDiv.text(dateArray[i]);
+    $("#canvasBorder").append(elem);
+}
+var percentArray = [30,50,80,20,90,60,30,80,10,35];//array传的都是百分比，最大高为100(根据实际数值计算)
+var dataArray = [1100,1234,4321,1110,2203,7898,1212,2323,1112,1231];//实际数值
+var dateArray = [06,07,08,09,10,11,12,13,14,15];//上面标识日期（天）
+draw("canvas",percentArray);
+$(".flagDiv").on("mouseover",function(){
+    var elem = $(this);
+    elem.css("background","rgba(195, 207, 230,0.5)");
+    elem.find(".percentCircle").removeClass("uhide");
+    var numberDiv = elem.find(".number");//定位显示的数字
+    numberDiv.removeClass("uhide");
+    var numWidth = numberDiv.width();
+    numberDiv.css("left",-1*numWidth+'px');
+    var offsetX = numberDiv.offset().left;
+    if(offsetX <= 0){
+        numberDiv.css("left",20+'px');
+        return;
+    }
+});
+$(".flagDiv").on("mouseout",function(){
+    var elem = $(this);
+    elem.css("background","none");
+    elem.find(".percentCircle").addClass("uhide");
+    elem.find(".number").addClass("uhide");
+});
+window.uexOnload=function(type){
+    console.log();
+}
+</script>
+</body>
+</html>

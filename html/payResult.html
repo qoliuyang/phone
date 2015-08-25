@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>支付结果</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+</head>
+<body class="um-vp ub-ver" ontouchstart>
+<div class="result">
+    <div class="c77 ubt ubb mt10 bc1 ub ub-ac pl15 h17">
+        <div class="c14 fs8">2015-06-25   14:17</div>
+    </div>
+    <div class="bc1 ubb c77 successArea">
+        <div class="h50 ub ub-ac ub-pc">
+            <div class="c85 fs17">购买成功</div>
+            <div class="ub-img img18 ml6 mt3"></div>
+        </div>
+        <div class="pl15 pr15 c77 ub ub-ac h28 ubt ub-pj">
+            <div class="ub ub-ac">
+                <div class="fs9 c4">成交金额：</div>
+                <div class="ubb pl5 pr5">
+                    <span class="fs12 c80">100.</span>
+                    <span class="fs8 c80">00元</span>
+                </div>
+            </div>
+            <div class="c80 pl5 pr5 ubb fs9 mt2 myIncome">查看收益</div>
+        </div>
+    </div>
+    <div class="bc1 ubb c77 failArea pl18 pr18 pt17 uhide">
+        <div class="ub">
+            <div class="ub ub-ac ub-f1 wo">
+                <div class="fs9 c4">交易金额：</div>
+                <div class="ubb pl5 pr5">
+                    <span class="fs12">100.</span>
+                    <span class="fs8">00元</span>
+                </div>
+            </div>
+            <div class="w0 ub-f1 ub ub-ac">
+                <div class="c4 fs9">购买失败</div>
+                <div class="ub-img img19 ml6 mt1"></div>
+            </div>
+        </div>
+        <div class="mt12 bc68 c1 ub ub-ac ub-pc h25 mb10 fs10 uc-a3 buyAgain">
+            <div>再次购买</div>
+        </div>
+    </div>
+    <div class="ub ubb c77 bc1 mt5 ubt">
+        <div class="ub-f1 w0 pt10 pb10 pl23 ubr">
+            <div class="fs10 c17">产品期限</div>
+            <div class="fs9 c4 mt8">1个月</div>
+        </div>
+        <div class="ub-f1 w0 pt11 pb11 pl23">
+            <div class="fs8 c17 ml23">约定年收益率：</div>
+            <div class="ub mt6 c80">
+                <div class="ub-img img4"></div>
+                <div class="fs10 ml8 mt1">10.</div>
+                <div class="fs8 mt3">38</div>
+                <div class="fs6 mt8">%</div>
+            </div>
+        </div>
+    </div>
+    <div class="ub c77 bc1 ubb">
+        <div class="ub-f1 w0 pt10 pb10 pl23 ubr">
+            <div class="fs10 c17">产品类型</div>
+            <div class="fs9 c4 mt8">投资</div>
+        </div>
+        <div class="ub-f1 w0 pt10 pb10 pl23 ubr">
+            <div class="fs10 c17 ml15">产品名称</div>
+            <div class="fs9 c4 mt8 ml15">大钱理财T085</div>
+        </div>
+    </div>
+    <div class="mt5 bc1 ub ub-ac pl15 pt10 pb10 ubb ubt c77">
+        <div class="fs10 c86">还款方式</div>
+        <div class="ml15 c14 fs8 mt2">按月返息到期还本</div>
+    </div>
+    <div class="bc1 ub ub-ac pl15 pt10 pb10 c77 ubb">
+        <div class="fs10 c86">订单号</div>
+        <div class="ml26 c14 fs8 mt2"> xxxx xxxx xxxx 123</div>
+    </div>
+    <div class="mt12 ml18 mr18 bc68 c1 ub ub-ac ub-pc h25 mb10 fs10 uc-a3 buyAgain">
+        <div>再次购买</div>
+    </div>
+</div>
+<div class="timeout hide">
+    <div class="mt22 ub ub-pc">
+        <div class="ub-img img20"></div>
+    </div>
+    <div class="tx-c c80 fs9 mt14">
+        购买超时
+    </div>
+    <div class="tx-c c84 fs8 mt7">
+        购买结果我们稍后会以短信方式通知您，请注意查看！
+    </div>
+    <div class="mt12 ml18 mr18 bc68 c1 ub ub-ac ub-pc h25 mb10 fs10 uc-a3 buyAgain">
+        <div>再次购买</div>
+    </div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    $(".myIncome").on("click",function(){
+        iG.openWin("myIncom_win");
+    });
+    $(".buyAgain").on("click",function(){
+        iG.openWin("productDetail_win");
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+.coverBg{
+    top:0px;
+    left:0px;
+    display:block;
+    position:fixed;
+    background:rgba(0,0,0,0.4);
+    z-index:10001;
+}
+.mydialog{
+    width:18.75em;
+}
+.noIcon, .yesIcon{
+    height: 2.93em;
+}

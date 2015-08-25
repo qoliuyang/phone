@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>购买记录</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/ui-position.css">
+<link rel="stylesheet" href="../css/ui-img.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+<link rel="stylesheet" href="../css/ui-input.css">
+<link rel="stylesheet" href="../css/iBox.css">
+<style>
+    .dashedLine{
+        border-bottom: 1px dashed #e5e4e4;
+    }
+</style>
+</head>
+<body class="um-vp ub-ver" ontouchstart>
+<div class="mt9 c77 ubb ubt bc1 pl8 pr8 recordItem">
+    <div class="ub h28 ub-ac dashedLine c14">
+        <div class="fs7">订单号：</div>
+        <div class="fs7">0000120150630</div>
+        <div class="ub-f1"></div>
+        <div class="fs7">2015-06-25  14:17</div>
+    </div>
+    <div class="ub dashedLine pt6 pb7">
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">金额（元）：</div>
+            <div class="mt5 c4">
+                <span class="fs13">100.</span>
+                <span class="fs8">00</span>
+            </div>
+        </div>
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">产品期限：</div>
+            <div class="mt5 c4">
+                <span class="fs8">短期理财</span>
+                <span class="fs13">/ 6</span>
+                <span class="fs8">个月</span>
+            </div>
+        </div>
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">年化收益率：</div>
+            <div class="mt5 c4">
+                <span class="fs13">11.</span>
+                <span class="fs8">32%</span>
+            </div>
+        </div>
+    </div>
+    <div class="ub ub-ac h18">
+        <div class="ub-f1 h7 uba uc-a3">
+            <div class="bc70 h_100 uc-a3" style="width:50%;"></div>
+        </div>
+        <div class="ml15 c80 fs9">计息中</div>
+    </div>
+</div>
+<div class="mt9 c77 ubb ubt bc1 pl8 pr8">
+    <div class="ub h28 ub-ac dashedLine c14">
+        <div class="fs7">订单号：</div>
+        <div class="fs7">0000120150630</div>
+        <div class="ub-f1"></div>
+        <div class="fs7">2015-06-25  14:17</div>
+    </div>
+    <div class="ub dashedLine pt6 pb7">
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">金额（元）：</div>
+            <div class="mt5 c4">
+                <span class="fs13">100.</span>
+                <span class="fs8">00</span>
+            </div>
+        </div>
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">产品期限：</div>
+            <div class="mt5 c4">
+                <span class="fs8">短期理财</span>
+                <span class="fs13">/ 6</span>
+                <span class="fs8">个月</span>
+            </div>
+        </div>
+        <div class="w0 ub-f1">
+            <div class="fs9 c17">年化收益率：</div>
+            <div class="mt5 c4">
+                <span class="fs13">11.</span>
+                <span class="fs8">32%</span>
+            </div>
+        </div>
+    </div>
+    <div class="ub ub-ac h18">
+        <div class="ub-f1 h7 uba uc-a3">
+            <div class="bc68 h_100 uc-a3" style="width:100%;"></div>
+        </div>
+        <div class="ml15 c85 fs9">已结清</div>
+    </div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/iBox.js"></script>
+<script src="../js/common.js"></script>
+<script>   
+zy_init();
+window.uexOnload=function(type){
+    
+}
+iP = {};
+iP.init = function(refresh){
+    $(".recordItem").on("click",function(){
+        iG.openWin("buyDetail_win");
+    });
+};
+iP.init();
+</script>
+</body>
+</html>

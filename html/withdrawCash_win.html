@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html class="um landscape min-width-240px min-width-320px min-width-480px min-width-768px min-width-1024px">
+<head>
+<title>提现</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="../css/ui-box.css">
+<link rel="stylesheet" href="../css/ui-base.css"> 
+<link rel="stylesheet" href="../css/win.css">
+<link rel="stylesheet" href="../css/ui-color.css">
+</head>
+<body class="um-vp c-wh" ontouchstart>
+<div id="page_0" class="up ub ub-ver" tabindex="0">
+    <!-- 页头 -->
+    <header id="header" class="header">
+        <div class="title">
+            <div goback></div>
+            <div class="title-mid fs12" id="title">提现</div>
+<!--            <div class="title-right" openmore></div>-->
+<!--            <div class="title-right"></div>-->
+        </div>  
+    </header>
+    <!-- 内容 -->
+    <div id="content" class="content"></div>
+</div>
+<script src="../js/zy_control.js"></script>
+<script src="../js/zy_click.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/win.js"></script>
+<script>
+zy_init();
+window.uexOnload = function(type){
+    window.onorientationchange = window.onresize = function(){
+        zy_resize("content",0,$$("header").offsetHeight);
+    }; 
+    if (!type) {
+        win.init();
+        win.openPopover("withdrawCash");
+    }
+}; 
+var iP = {};
+iP.unLoad = function(){
+    uexWindow.close();
+};
+</script>
+</body>
+</html>
